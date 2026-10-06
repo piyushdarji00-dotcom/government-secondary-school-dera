@@ -41,6 +41,13 @@
           <p>Manage students, teachers, classes and reports.</p>
           <button onclick="showLogin('principal')">Principal Login</button>
         </article>
+
+        <article class="card registration-card">
+          <div class="emoji">📝</div>
+          <h3>Student Registration</h3>
+          <p>Register a new student and create a Student Login ID.</p>
+          <button onclick="openStudentRegistration()">Register Student</button>
+        </article>
       </div>
     </section>
 
@@ -53,6 +60,26 @@
       <input id="password" type="password" autocomplete="current-password" placeholder="Enter password">
       <button class="primary" onclick="login()">Login</button>
       <p id="loginMsg" class="msg"></p>
+    </section>
+
+    <section id="studentRegistration" class="panel hidden">
+      <button class="back" onclick="goHome()">← Back</button>
+      <h2>Student Registration</h2>
+      <p class="sub">Create a student account</p>
+      <div class="grid">
+        <div><label>Student Name</label><input id="rName" placeholder="Full name"></div>
+        <div><label>Child UID</label><input id="rUid" placeholder="Child UID" inputmode="numeric"></div>
+        <div><label>Date of Birth</label><input id="rDob" type="date"></div>
+        <div><label>Gender</label><select id="rGender"><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+        <div><label>Class</label><input id="rClass" placeholder="e.g. 9-A"></div>
+        <div><label>Roll Number</label><input id="rRoll" placeholder="Roll number"></div>
+        <div><label>Parent / Guardian Name</label><input id="rParent" placeholder="Parent or guardian"></div>
+        <div><label>Mobile Number</label><input id="rMobile" type="tel" placeholder="Mobile number"></div>
+        <div><label>Student Login ID</label><input id="rUser" placeholder="Create login ID"></div>
+        <div><label>Password</label><input id="rPass" type="password" placeholder="Create password"></div>
+      </div>
+      <button class="primary" onclick="registerStudent()">Create Student Account</button>
+      <p id="registrationMsg" class="msg"></p>
     </section>
 
     <section id="principalDashboard" class="panel hidden">

@@ -9,6 +9,7 @@ function showLogin(type){
   document.getElementById("loginPage").classList.add("hidden");
   document.getElementById("loginBox").classList.remove("hidden");
   document.getElementById("principalDashboard").classList.add("hidden");
+  document.getElementById("studentRegistration").classList.add("hidden");
   document.getElementById("loginTitle").textContent =
     type.charAt(0).toUpperCase()+type.slice(1)+" Login";
   document.getElementById("username").value="";
@@ -19,7 +20,49 @@ function showLogin(type){
 function goHome(){
   document.getElementById("loginBox").classList.add("hidden");
   document.getElementById("principalDashboard").classList.add("hidden");
+  document.getElementById("studentRegistration").classList.add("hidden");
   document.getElementById("loginPage").classList.remove("hidden");
+}
+
+function openStudentRegistration(){
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("principalDashboard").classList.add("hidden");
+  document.getElementById("studentRegistration").classList.remove("hidden");
+  document.getElementById("registrationMsg").textContent="";
+}
+
+function registerStudent(){
+  const student = {
+    name: document.getElementById("rName").value.trim(),
+    uid: document.getElementById("rUid").value.trim(),
+    dob: document.getElementById("rDob").value,
+    gender: document.getElementById("rGender").value,
+    cls: document.getElementById("rClass").value.trim(),
+    roll: document.getElementById("rRoll").value.trim(),
+    parent: document.getElementById("rParent").value.trim(),
+    mobile: document.getElementById("rMobile").value.trim(),
+    user: document.getElementById("rUser").value.trim(),
+    pass: document.getElementById("rPass").value
+  };
+  const msg = document.getElementById("registrationMsg");
+  if(!student.name || !student.uid || !student.cls || !student.user || !student.pass){
+    msg.textContent="Please fill Name, Child UID, Class, Login ID and Password.";
+    msg.style.color="#dc3545";
+    return;
+  }
+  const students = getStudents();
+  if(students.some(x=>x.user===student.user)){
+    msg.textContent="This Student Login ID already exists.";
+    msg.style.color="#dc3545";
+    return;
+  }
+  student.created = new Date().toLocaleString();
+  students.push(student);
+  localStorage.setItem("dera_students", JSON.stringify(students));
+  ["rName","rUid","rDob","rGender","rClass","rRoll","rParent","rMobile","rUser","rPass"].forEach(id=>document.getElementById(id).value="");
+  msg.textContent="Student registered successfully.";
+  msg.style.color="#16803c";
 }
 
 function login(){
