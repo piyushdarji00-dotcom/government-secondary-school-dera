@@ -1,59 +1,113 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Government Secondary School Dera</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Secondary School Dera</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="brand"><div class="logo">🏫</div><div><b>GOVERNMENT SECONDARY SCHOOL DERA</b><small>Student Management Portal</small></div></div>
-  <nav><a href="#home">Home</a><a href="#login">Login</a><a href="#about">About</a></nav>
-</header>
+  <header class="top">
+    <div class="school-icon">🏫</div>
+    <div>
+      <h1>GOVERNMENT SECONDARY SCHOOL DERA</h1>
+      <p>Student Management Portal</p>
+    </div>
+  </header>
 
-<main>
-<section id="home" class="hero">
-  <div>
-    <span class="tag">DIGITAL SCHOOL PORTAL</span>
-    <h1>Government Secondary<br><span>School Dera</span></h1>
-    <p>Secure and simple online portal for Students, Teachers and Principal.</p>
-    <a class="btn" href="#login">Login Portal →</a>
-  </div>
-  <div class="hero-card"><div class="big-icon">🎓</div><h3>School Management</h3><p>Student profile, Child UID, documents, class management and administration.</p></div>
-</section>
+  <main class="container">
+    <section id="loginPage">
+      <h2>Login Portal</h2>
+      <p class="sub">Select your account type</p>
 
-<section id="login" class="section">
-<h2>Login Portal</h2><p class="muted">Select your account type</p>
-<div class="cards">
-  <div class="card"><div class="icon">🎓</div><h3>Student Login</h3><p>View profile, photo, Child UID and upload documents.</p><button onclick="openLogin('Student')">Student Login</button></div>
-  <div class="card"><div class="icon">👨‍🏫</div><h3>Teacher Login</h3><p>Manage assigned class and student entries.</p><button onclick="openLogin('Teacher')">Teacher Login</button></div>
-  <div class="card"><div class="icon">👨‍💼</div><h3>Principal Login</h3><p>Complete school administration and management.</p><button onclick="openLogin('Principal')">Principal Login</button></div>
-</div>
-</section>
+      <div class="cards">
+        <article class="card">
+          <div class="emoji">🎓</div>
+          <h3>Student Login</h3>
+          <p>View profile, photo, Child UID and documents.</p>
+          <button onclick="showLogin('student')">Student Login</button>
+        </article>
 
-<section id="about" class="about section">
-<h2>School Portal Features</h2>
-<div class="features">
-<div>🆔 <b>Child UID</b><br><small>Student identification</small></div>
-<div>📷 <b>Student Photo</b><br><small>Profile management</small></div>
-<div>📁 <b>Documents</b><br><small>Secure document upload</small></div>
-<div>🏫 <b>Class Management</b><br><small>Class-wise student records</small></div>
-</div>
-</section>
-</main>
+        <article class="card">
+          <div class="emoji">👨‍🏫</div>
+          <h3>Teacher Login</h3>
+          <p>Manage assigned class and student entries.</p>
+          <button onclick="showLogin('teacher')">Teacher Login</button>
+        </article>
 
-<div id="modal" class="modal hidden">
-<div class="modal-box"><button class="close" onclick="closeLogin()">×</button>
-<h2 id="loginTitle">Login</h2>
-<form onsubmit="demoLogin(event)">
-<label>Username</label><input id="username" required placeholder="Enter username">
-<label>Password</label><input type="password" id="password" required placeholder="Enter password">
-<button class="btn full">Login</button>
-<p class="forgot">Forgot Password? Contact Principal.</p>
-</form>
-</div></div>
+        <article class="card">
+          <div class="emoji">👨‍💼</div>
+          <h3>Principal Login</h3>
+          <p>Manage students, teachers, classes and reports.</p>
+          <button onclick="showLogin('principal')">Principal Login</button>
+        </article>
+      </div>
+    </section>
 
-<footer>© 2026 Government Secondary School Dera • Digital School Portal</footer>
-<script src="app.js"></script>
-</body></html>
+    <section id="loginBox" class="panel hidden">
+      <button class="back" onclick="goHome()">← Back</button>
+      <h2 id="loginTitle">Login</h2>
+      <label>Username / ID</label>
+      <input id="username" type="text" autocomplete="username" placeholder="Enter username">
+      <label>Password</label>
+      <input id="password" type="password" autocomplete="current-password" placeholder="Enter password">
+      <button class="primary" onclick="login()">Login</button>
+      <p id="loginMsg" class="msg"></p>
+    </section>
+
+    <section id="principalDashboard" class="panel hidden">
+      <div class="dashHead">
+        <div>
+          <h2>Principal Dashboard</h2>
+          <p>Government Secondary School Dera</p>
+        </div>
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+
+      <div class="stats">
+        <div><b id="studentCount">0</b><span>Students</span></div>
+        <div><b id="teacherCount">0</b><span>Teachers</span></div>
+      </div>
+
+      <div class="tabs">
+        <button onclick="openTab('students')">Student Registration</button>
+        <button onclick="openTab('teachers')">Teacher Registration</button>
+        <button onclick="openTab('list')">View Records</button>
+      </div>
+
+      <div id="studentsTab" class="tab">
+        <h3>Register Student</h3>
+        <div class="grid">
+          <div><label>Student Name</label><input id="sName" placeholder="Full name"></div>
+          <div><label>Child UID</label><input id="sUid" placeholder="Child UID" inputmode="numeric"></div>
+          <div><label>Class</label><input id="sClass" placeholder="e.g. 9-A"></div>
+          <div><label>Student Login ID</label><input id="sUser" placeholder="Create login ID"></div>
+          <div><label>Password</label><input id="sPass" placeholder="Create password"></div>
+        </div>
+        <button class="primary" onclick="addStudent()">Save Student</button>
+        <p id="studentMsg" class="msg"></p>
+      </div>
+
+      <div id="teachersTab" class="tab hidden">
+        <h3>Register Teacher</h3>
+        <div class="grid">
+          <div><label>Teacher Name</label><input id="tName" placeholder="Full name"></div>
+          <div><label>Assigned Class</label><input id="tClass" placeholder="e.g. 9-A"></div>
+          <div><label>Teacher Login ID</label><input id="tUser" placeholder="Create login ID"></div>
+          <div><label>Password</label><input id="tPass" placeholder="Create password"></div>
+        </div>
+        <button class="primary" onclick="addTeacher()">Save Teacher</button>
+        <p id="teacherMsg" class="msg"></p>
+      </div>
+
+      <div id="listTab" class="tab hidden">
+        <h3>Saved Records</h3>
+        <div id="records"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© Government Secondary School Dera</footer>
+  <script src="app.js"></script>
+</body>
+</html>
