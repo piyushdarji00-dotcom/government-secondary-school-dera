@@ -41,13 +41,6 @@
           <p>Manage students, teachers, classes and reports.</p>
           <button onclick="showLogin('principal')">Principal Login</button>
         </article>
-
-        <article class="card registration-card">
-          <div class="emoji">📝</div>
-          <h3>Student Registration</h3>
-          <p>Register a new student and create a Student Login ID.</p>
-          <button onclick="openStudentRegistration()">Register Student</button>
-        </article>
       </div>
     </section>
 
@@ -68,7 +61,7 @@
       <p class="sub">Create a student account</p>
       <div class="grid">
         <div><label>Student Name</label><input id="rName" placeholder="Full name"></div>
-        <div><label>Child UID</label><input id="rUid" placeholder="Child UID" inputmode="numeric"></div>
+        <div><label>Child UID</label><input id="rUid" placeholder="Child UID"></div>
         <div><label>Date of Birth</label><input id="rDob" type="date"></div>
         <div><label>Gender</label><select id="rGender"><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
         <div><label>Class</label><input id="rClass" placeholder="e.g. 9-A"></div>
@@ -80,6 +73,16 @@
       </div>
       <button class="primary" onclick="registerStudent()">Create Student Account</button>
       <p id="registrationMsg" class="msg"></p>
+    </section>
+
+    <section id="studentDashboard" class="panel hidden">
+      <div class="dashHead"><div><h2>Student Dashboard</h2><p>Government Secondary School Dera</p></div><button class="logout" onclick="logout()">Logout</button></div>
+      <div id="studentProfile" class="record"></div>
+    </section>
+
+    <section id="teacherDashboard" class="panel hidden">
+      <div class="dashHead"><div><h2>Teacher Dashboard</h2><p>Government Secondary School Dera</p></div><button class="logout" onclick="logout()">Logout</button></div>
+      <div id="teacherProfile" class="record"></div>
     </section>
 
     <section id="principalDashboard" class="panel hidden">
